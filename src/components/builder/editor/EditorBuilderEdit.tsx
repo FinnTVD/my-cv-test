@@ -21,6 +21,7 @@ const EditorBuilderEdit = ({
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<Quill | null>(null);
   useEffect(() => {
+    if (typeof window === "undefined") return;
     quillRef.current = new Quill(editorRef.current!, {
       theme: "snow",
       modules: {

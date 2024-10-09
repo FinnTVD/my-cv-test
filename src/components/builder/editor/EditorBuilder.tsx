@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import { cn } from "@/lib/utils";
+
 const EditorBuilder = ({
   className,
   data,
@@ -24,7 +26,7 @@ const EditorBuilder = ({
   return (
     <div
       onClick={handleClick}
-      className={className}
+      className={cn("w-full", className)}
       dangerouslySetInnerHTML={{ __html: data }}
     ></div>
   );
