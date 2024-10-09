@@ -28,7 +28,7 @@ const BoxEditor = ({
         className="relative"
         ref={editorRef}
         onInput={(e) => {
-          console.log(e.currentTarget.textContent);
+          console.log(e.currentTarget.innerHTML);
         }}
         contentEditable="true"
         aria-multiline="true"
