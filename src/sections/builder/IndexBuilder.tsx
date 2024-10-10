@@ -69,7 +69,7 @@ const IndexBuilder = () => {
       <div className="w-[50vw] flex-shrink-0 h-screen sticky top-0 left-0 pt-[2rem]">
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <RHFTextField name="title" label={"title"} />
-          <RHFEditor simple name="description" sx={{ height: 200 }} />
+          <RHFEditor simple name="description" sx={{ height: 500 }} />
           <RHFUpload
             name="background"
             maxSize={3145728}
