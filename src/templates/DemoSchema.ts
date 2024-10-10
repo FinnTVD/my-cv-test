@@ -8,10 +8,8 @@ export const DemoSchema = Yup.object({
   categories: Yup.array().of(
     Yup.object({
       name: Yup.string().required(),
-      icon: Yup.object({
-        src: Yup.string().required(),
-        alt: Yup.string().required(),
-      }),
+      icon: Yup.mixed<any>().nullable().required("Cover is required"),
     })
   ),
+  list: Yup.array().of(Yup.string()),
 });

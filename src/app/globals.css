@@ -91,3 +91,6 @@ ol {
   list-style: decimal;
   padding-left: 2rem;
 }
+.lazy-load-image-loaded {
+  filter: blur(0px);
+}

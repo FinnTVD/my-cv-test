@@ -3,7 +3,7 @@
 import { useTheme } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 // theme
-// import { bgBlur } from "src/theme/css";
+import { bgBlur } from "@/theme/css";
 //
 import Iconify from "../iconify";
 
@@ -36,10 +36,10 @@ export default function DownloadButton({ onDownload }: Props) {
 
         "&:hover": {
           opacity: 1,
-          // ...bgBlur({
-          //   opacity: 0.64,
-          //   color: theme.palette.grey[900],
-          // }),
+          ...bgBlur({
+            opacity: 0.64,
+            color: theme.palette.grey[900],
+          }),
         },
       }}
     >

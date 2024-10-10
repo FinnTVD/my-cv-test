@@ -5,11 +5,15 @@ import FormProvider, {
   RHFTextField,
   RHFUpload,
 } from "@/components/builder/hook-form";
+import RHFRepeater from "@/components/builder/hook-form/rhf-repeater";
 import { description } from "@/lib/dataFake";
 import { DemoSchema } from "@/templates/DemoSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Stack } from "@mui/material";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
+import LoadingButton from "@mui/lab/LoadingButton";
+import RHFRepeaterCategories from "./RHFRepeaterCategories";
 
 const IndexBuilder = () => {
   const methods = useForm({
@@ -21,19 +25,17 @@ const IndexBuilder = () => {
       categories: [
         {
           name: "",
-          icon: {
-            src: "",
-            alt: "",
-          },
+          icon: "",
         },
       ],
+      list: [""],
     },
   });
   const {
     watch,
     setValue,
     handleSubmit,
-    formState: { dirtyFields, errors },
+    formState: { dirtyFields, errors, isSubmitting },
   } = methods;
 
   const values = watch();
@@ -74,9 +76,28 @@ const IndexBuilder = () => {
             onDrop={handleDrop}
             onDelete={handleRemoveFile}
           />
+          <RHFRepeaterCategories
+            keyName="categories"
+            title="Categories"
+            child={{
+              name: "",
+              icon: "",
+            }}
+          />
+          <RHFRepeater keyName="list" title="List" child={""} />
+          <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+            <LoadingButton
+              type="submit"
+              variant="contained"
+              loading={isSubmitting}
+            >
+              Save changes
+            </LoadingButton>
+          </Stack>
         </FormProvider>
       </div>
       <div className="w-[50vw] flex-shrink-0 border border-solid border-green-200">
+        <div>{JSON.stringify(values, null, 2)}</div>
         {/* <TextBuilder
           data={form.banner.title}
           name="form.banner.title"
