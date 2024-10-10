@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 "use client";
 import { forwardRef } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
