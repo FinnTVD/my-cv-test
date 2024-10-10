@@ -1,11 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import EditorBuilder from "@/components/builder/editor/EditorBuilder";
 import GenerateBuilderEdit from "@/components/builder/GenerateBuilderEdit";
 import ImageBuilder from "@/components/builder/image/ImageBuilder";
 import TextBuilder from "@/components/builder/text/TextBuilder";
+import { Button } from "@/components/ui/button";
 import { description } from "@/lib/dataFake";
+import { DemoSchema } from "@/templates/DemoSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const IndexDemo = () => {
   const [form, setForm] = useState({
@@ -18,14 +23,45 @@ const IndexDemo = () => {
       },
     },
   });
+
+  const methods = useForm({
+    resolver: yupResolver(DemoSchema),
+    defaultValues: {
+      title: "Trinh Van Duc",
+      description: description,
+      background: {
+        src: "https://placehold.co/1200x600",
+        alt: "1200x600",
+      },
+      categories: [
+        {
+          name: "",
+          icon: {
+            src: "",
+            alt: "",
+          },
+        },
+      ],
+    },
+  });
+  const {
+    watch,
+    setValue,
+    formState: { dirtyFields, errors },
+  } = methods;
+
+  const values = watch();
+  console.log("🚀 ~ IndexDemo ~ values:", values);
+
   const [currentType, setCurrentType] = useState<
     "text" | "editor" | "image" | ""
   >();
   const [currentKey, setCurrentKey] = useState("");
-  console.log("🚀 ~ Page ~ currentKey:", currentKey);
   const [currentData, setCurrentData] = useState();
 
-  console.log("🚀 ~ Page ~ form:", form);
+  const handelClickTest = () => {
+    setValue("title", "Trinh Van Duc1", { shouldDirty: true });
+  };
   return (
     <div className="w-full flex relative">
       <div className="w-[30vw] flex-shrink-0 h-screen sticky top-0 left-0">
@@ -59,6 +95,7 @@ const IndexDemo = () => {
           setCurrentKey={setCurrentKey}
           setCurrentData={setCurrentData}
         />
+        <Button onClick={handelClickTest}>test</Button>
       </div>
     </div>
   );
