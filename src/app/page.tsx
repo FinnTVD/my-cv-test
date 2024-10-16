@@ -1,56 +1,76 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable jsx-a11y/role-supports-aria-props */
-
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import IndexHome from "@/sections/home/IndexHome";
 
 export default function Home() {
-  return (
-    // <main className="flex space-x-[2rem]">
-    //   <div className="w-[20%] sticky top-0 left-0 flex flex-col space-y-[1rem] h-fit shadow-lg items-center ">
-    //     <Link href={"#section1"}>Thông Tin</Link>
-    //     <Link href={"#section2"}>Overview</Link>
-    //     <Link href={"#section3"}>Work experience</Link>
-    //   </div>
-    //   <div className="w-[70%]">
-    //     <section className="h-[500px]"></section>
-    //     <div className="h-[500px]">
-    //       <BoxEditor id="section1" content="Trinh Van Duc" />
-    //     </div>
-    //     <div className="h-fit mb-[100px]">
-    //       <BoxEditor
-    //         spellCheck={true}
-    //         id="section2"
-    //         content="- Over 2 years of experience in programming with good communication
-    //           and quick learning skills - Strengths: Front-end technology and
-    //           Back-end web application development - Proficiency in HTML, CSS,
-    //           JavaScript - Strong proficiency in JavaScript, including DOM
-    //           manipulation and the JavaScript object model - Thorough under
-    //           standing of React.js and it score principles - Experience with
-    //           popular React.js workflows (such as Flux or Redux) - Familiarity
-    //           with newer specifications of EcmaScript - Experience with data
-    //           structure libraries - Familiarity with RESTful APIs - Strong
-    //           Experience in: PHP, JavaScript (ReactJS, React-native), MySQL,
-    //           NoSQL, GraphQL, Redis, JSON, API, Docker, Kubernetes, Rancher, AWS
-    //           services - Proficient use of source code management tools: SVN, GIT
-    //           - Proficiency in operating systems: Linux (Ubuntu, OSX), Windows -
-    //           Ability to learn and apply new technology quickly - Current working
-    //           location: Ha Noi, Viet Nam"
-    //       />
-    //     </div>
-    //     <div className="h-screen">
-    //       <BoxEditor
-    //         spellCheck={true}
-    //         id="section3"
-    //         content="Work experience"
-    //       />
-    //     </div>
-    //   </div>
-    // </main>
-    <main className="h-screen w-full flex justify-center items-center">
-      <Button>
-        <Link href={"/demo"}>Demo</Link>
-      </Button>
-    </main>
-  );
+  const data = {
+    nickName: {
+      value: "FINNIT",
+      type: "text",
+      hidden: false,
+      color: "#000",
+    },
+    banner: {
+      title: {
+        value: "Trịnh Văn Đức",
+        type: "text",
+        hidden: false,
+        color: "#000",
+      },
+      position: {
+        value: "Front - end Developer",
+        type: "text",
+        hidden: false,
+        color: "#000",
+      },
+    },
+    myProjects: {
+      description: {
+        value:
+          "I strive for excellence and pay attention to the smallest details.",
+        type: "text",
+        hidden: false,
+        color: "#000",
+      },
+      projects: [
+        {
+          name: {
+            value: "Project 1",
+            type: "text",
+            hidden: false,
+            color: "#000",
+          },
+          technologies: {
+            value: [
+              {
+                value: "HTML",
+                type: "text",
+                hidden: false,
+                color: "#000",
+              },
+              {
+                value: "CSS",
+                type: "text",
+                hidden: false,
+                color: "#000",
+              },
+            ],
+            type: "array",
+            hidden: false,
+            color: "#000",
+          },
+          thumbnail: {
+            value: "https://placehold.co/800x900",
+            type: "image",
+            hidden: false,
+          },
+          slug: {
+            value: "/",
+            type: "text",
+            hidden: false,
+            color: "#000",
+          },
+        },
+      ],
+    },
+  };
+  return <IndexHome data={data} />;
 }
