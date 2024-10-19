@@ -24,6 +24,7 @@ const FormHandle = ({ data }: { data: any }) => {
 
   const values = watch();
   console.log("🚀 ~ FormHandle ~ values:", values);
+
   useEffect(() => {
     setValuesForm(values || data);
   }, [JSON.stringify(values)]);

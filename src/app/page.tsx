@@ -25,51 +25,55 @@ export default function Home() {
     myProjects: {
       description: {
         value:
-          "I strive for excellence and pay attention to the smallest details.",
-        type: "text",
+          "<p>I strive for excellence and pay attention to the <strong>smallest</strong> details.</p>",
+        type: "editor",
         hidden: false,
         color: "#000",
       },
-      projects: [
-        {
-          name: {
-            value: "Project 1",
-            type: "text",
-            hidden: false,
-            color: "#000",
+      projects: {
+        value: [
+          {
+            name: {
+              value: "Project 1",
+              type: "text",
+              hidden: false,
+              color: "#000",
+            },
+            technologies: {
+              value: [
+                {
+                  value: "HTML",
+                  type: "text",
+                  hidden: false,
+                  color: "#000",
+                },
+                {
+                  value: "CSS",
+                  type: "text",
+                  hidden: false,
+                  color: "#000",
+                },
+              ],
+              type: "array",
+              hidden: false,
+              color: "#000",
+            },
+            thumbnail: {
+              value: "https://placehold.co/800x900",
+              type: "image",
+              hidden: false,
+            },
+            slug: {
+              value: "/",
+              type: "text",
+              hidden: false,
+              color: "#000",
+            },
           },
-          technologies: {
-            value: [
-              {
-                value: "HTML",
-                type: "text",
-                hidden: false,
-                color: "#000",
-              },
-              {
-                value: "CSS",
-                type: "text",
-                hidden: false,
-                color: "#000",
-              },
-            ],
-            type: "array",
-            hidden: false,
-            color: "#000",
-          },
-          thumbnail: {
-            value: "https://placehold.co/800x900",
-            type: "image",
-            hidden: false,
-          },
-          slug: {
-            value: "/",
-            type: "text",
-            hidden: false,
-            color: "#000",
-          },
-        },
-      ],
+        ],
+        type: "array",
+        hidden: false,
+      },
     },
   };
   return <IndexHome data={data} />;

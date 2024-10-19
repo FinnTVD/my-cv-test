@@ -5,6 +5,7 @@ import { Box, Tab, Tabs } from "@mui/material";
 import { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import ColorPicker from "react-pick-color";
+import RenderComponent from "./RenderComponent";
 const TABS = [
   {
     value: "one",
@@ -25,8 +26,6 @@ const TABS = [
 const ContainerEdit = () => {
   const { currentKey } = useStore((state) => state);
   const { getValues, setValue } = useFormContext();
-  console.log("🚀 ~ ContainerEdit ~ getValues:", getValues(currentKey));
-  console.log("🚀 ~ ContainerEdit ~ currentKey:", currentKey);
 
   const dataField = getValues(currentKey);
 
@@ -50,10 +49,18 @@ const ContainerEdit = () => {
           />
         ))}
       </Tabs>
-      {TABS.slice(0, 2).map(
-        (tab) =>
-          tab.value === currentTab &&
-          currentTab === "two" && (
+      {TABS.slice(0, 2).map((tab) => {
+        if (tab.value === currentTab && currentTab === "one") {
+          return (
+            <RenderComponent
+              key={tab.value}
+              data={dataField}
+              currentKey={currentKey}
+            />
+          );
+        }
+        if (tab.value === currentTab && currentTab === "two") {
+          return (
             <Box
               key={tab.value}
               sx={{
@@ -71,8 +78,9 @@ const ContainerEdit = () => {
                 }
               />
             </Box>
-          )
-      )}
+          );
+        }
+      })}
     </div>
   );
 };

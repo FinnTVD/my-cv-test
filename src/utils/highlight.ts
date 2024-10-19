@@ -1,3 +1,4 @@
+"use client";
 import hljs from "highlight.js";
 import "highlight.js/styles/base16/tomorrow-night.css";
 

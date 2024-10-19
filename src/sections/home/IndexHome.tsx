@@ -1,10 +1,11 @@
-"use client";
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import useStore from "@/app/(store)/store";
-import ProviderEdit from "./components/ProviderEdit";
-import FormHandle from "./components/FormHandle";
+// import FormHandle from "./components/FormHandle";
 import ContainerContent from "./components/ContainerContent";
+import dynamic from "next/dynamic";
+const FormHandle = dynamic(() => import("./components/FormHandle"), {
+  ssr: false,
+});
 
 const IndexHome = ({ data }: any) => {
   return (

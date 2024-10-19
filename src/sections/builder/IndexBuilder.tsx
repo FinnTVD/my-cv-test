@@ -5,7 +5,6 @@ import FormProvider, {
   RHFTextField,
   RHFUpload,
 } from "@/components/builder/hook-form";
-import RHFRepeater from "@/components/builder/hook-form/rhf-repeater";
 import { description } from "@/lib/dataFake";
 import { DemoSchema } from "@/templates/DemoSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -84,7 +83,6 @@ const IndexBuilder = () => {
               icon: "",
             }}
           />
-          <RHFRepeater keyName="list" title="List" child={""} />
           <Stack alignItems="flex-end" sx={{ mt: 3 }}>
             <LoadingButton
               type="submit"

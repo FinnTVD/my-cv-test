@@ -1,6 +1,7 @@
-import { ReactQuillProps } from 'react-quill';
+"use client";
+import { ReactQuillProps } from "react-quill";
 // @mui
-import { Theme, SxProps } from '@mui/material/styles';
+import { Theme, SxProps } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -9,4 +10,5 @@ export interface EditorProps extends ReactQuillProps {
   simple?: boolean;
   helperText?: React.ReactNode;
   sx?: SxProps<Theme>;
+  id?: string;
 }

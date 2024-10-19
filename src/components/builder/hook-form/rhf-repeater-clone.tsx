@@ -5,13 +5,10 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import RHFTextField from "./rhf-text-field";
 import Iconify from "./iconify";
 import RenderComponent from "@/sections/home/components/RenderComponent";
-import RHFRepeaterClone from "./rhf-repeater-clone";
-import { deepClone, resetKeysInObject } from "@/sections/home/utils";
 
-export default function RHFRepeater({
+export default function RHFRepeaterClone({
   name,
   child,
 }: {
@@ -33,35 +30,10 @@ export default function RHFRepeater({
     remove(index);
   };
 
+  console.log("getValues(`${name}[${index}]`)", getValues(`${name}`));
+
   return (
     <Box sx={{ p: 3 }}>
-      {fields.map((item, index) => (
-        <Stack key={index}>
-          {Array.from(Object.keys(child)).map((key, idx) => {
-            if (Array.isArray(getValues(`${name}[${index}].${key}.value`))) {
-              const dataClone = deepClone(
-                getValues(`${name}[${index}].${key}.value`)?.[0]
-              );
-              return (
-                <RHFRepeaterClone
-                  key={idx}
-                  name={`${name}[${index}].${key}.value`}
-                  child={resetKeysInObject(dataClone)}
-                />
-              );
-            } else {
-              return (
-                <RenderComponent
-                  key={idx}
-                  data={getValues(`${name}[${index}].${key}`)}
-                  currentKey={`${name}[${index}].${key}`}
-                />
-              );
-            }
-          })}
-        </Stack>
-      ))}
-
       <Stack
         divider={<Divider flexItem sx={{ borderStyle: "dashed" }} />}
         spacing={1.5}
@@ -73,11 +45,9 @@ export default function RHFRepeater({
               spacing={2}
               sx={{ width: 1 }}
             >
-              <RHFTextField
-                size="small"
-                name={`${name}[${index}]`}
-                label="Item"
-                InputLabelProps={{ shrink: true }}
+              <RenderComponent
+                data={getValues(`${name}[${index}]`)}
+                currentKey={`${name}[${index}]`}
               />
             </Stack>
 
