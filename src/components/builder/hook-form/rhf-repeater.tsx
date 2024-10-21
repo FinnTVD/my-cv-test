@@ -10,6 +10,7 @@ import Iconify from "./iconify";
 import RenderComponent from "@/sections/home/components/RenderComponent";
 import RHFRepeaterClone from "./rhf-repeater-clone";
 import { deepClone, resetKeysInObject } from "@/sections/home/utils";
+import useStore from "@/app/(store)/store";
 
 export default function RHFRepeater({
   name,
@@ -19,6 +20,7 @@ export default function RHFRepeater({
   child: any;
 }) {
   const { control, getValues } = useFormContext();
+  const { setCurrentKeyChild } = useStore((state) => state);
 
   const { fields, append, remove } = useFieldArray({
     control,

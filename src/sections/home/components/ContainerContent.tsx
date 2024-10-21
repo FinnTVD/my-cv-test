@@ -59,6 +59,28 @@ const ContainerContent = () => {
           )}
         </div>
       </ProviderEdit>
+      <ProviderEdit name="platform">
+        <div className="space-y-[3rem]">
+          {valuesForm.platform.value.map((item: any, index: number) => (
+            <div key={index}>
+              <h2>{item.value}</h2>
+              <div className="flex flex-wrap gap-[1rem]">
+                {item.libs.value.map((lib: any, index: number) => (
+                  <div key={index}>{lib.value}</div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </ProviderEdit>
+      <div className="h-screen w-full flex justify-center items-end">
+        <iframe
+          src="http://localhost:3000/"
+          frameBorder="0"
+          width={320}
+          height={780}
+        ></iframe>
+      </div>
     </div>
   );
 };

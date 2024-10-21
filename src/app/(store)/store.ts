@@ -4,7 +4,9 @@ import { create } from "zustand";
 
 type Store = {
   currentKey: string;
+  currentKeyChild: string;
   setCurrentKey: (value: string) => void;
+  setCurrentKeyChild: (value: string) => void;
   valuesForm: any;
   setValuesForm: (value: any) => void;
 };
@@ -12,6 +14,8 @@ type Store = {
 const useStore = create<Store>()((set) => ({
   currentKey: "",
   setCurrentKey: (value) => set({ currentKey: value }),
+  currentKeyChild: "",
+  setCurrentKeyChild: (value) => set({ currentKeyChild: value }),
   valuesForm: null,
   setValuesForm: (value) => set({ valuesForm: value }),
 }));

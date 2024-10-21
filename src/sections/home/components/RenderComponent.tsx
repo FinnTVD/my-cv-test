@@ -16,6 +16,7 @@ const RenderComponent = ({
   data: any;
   currentKey: string;
 }) => {
+  console.log("🚀 ~ data:", data);
   //NOTE - TEXT
   if (data?.type === "text") {
     return (
