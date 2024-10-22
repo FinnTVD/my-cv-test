@@ -5,20 +5,20 @@ export default function Home() {
     nickName: {
       value: "FINNIT",
       type: "text",
-      hidden: false,
+      hidden: ["desktop"],
       color: "#000",
     },
     banner: {
       title: {
         value: "Trịnh Văn Đức",
         type: "text",
-        hidden: false,
+        hidden: [],
         color: "#000",
       },
       position: {
         value: "Front - end Developer",
         type: "text",
-        hidden: false,
+        hidden: [],
         color: "#000",
       },
     },
@@ -27,7 +27,7 @@ export default function Home() {
         value:
           "<p>I strive for excellence and pay attention to the <strong>smallest</strong> details.</p>",
         type: "editor",
-        hidden: false,
+        hidden: [],
         color: "#000",
       },
       projects: {
@@ -36,7 +36,7 @@ export default function Home() {
             name: {
               value: "Project 1",
               type: "text",
-              hidden: false,
+              hidden: [],
               color: "#000",
             },
             technologies: {
@@ -44,35 +44,35 @@ export default function Home() {
                 {
                   value: "HTML",
                   type: "text",
-                  hidden: false,
+                  hidden: [],
                   color: "#000",
                 },
                 {
                   value: "CSS",
                   type: "text",
-                  hidden: false,
+                  hidden: [],
                   color: "#000",
                 },
               ],
               type: "array",
-              hidden: false,
+              hidden: [],
               color: "#000",
             },
             thumbnail: {
               value: "https://placehold.co/800x900",
               type: "image",
-              hidden: false,
+              hidden: [],
             },
             slug: {
               value: "/",
               type: "text",
-              hidden: false,
+              hidden: [],
               color: "#000",
             },
           },
         ],
         type: "array",
-        hidden: false,
+        hidden: [],
       },
     },
     platform: {
@@ -82,30 +82,51 @@ export default function Home() {
             value: "Website DEVELOPMENT",
             type: "text",
             color: "#000",
-            hidden: false,
+            hidden: [],
           },
           libs: {
             value: [
               {
                 value: "Framework",
                 type: "text",
-                hidden: false,
+                hidden: [],
                 color: "#000",
               },
               {
                 value: "Libraries",
                 type: "text",
-                hidden: false,
+                hidden: [],
                 color: "#000",
               },
             ],
             type: "array",
-            hidden: false,
+            hidden: [],
           },
         },
       ],
       type: "array",
-      hidden: false,
+      hidden: [],
+    },
+    albumImages: {
+      value: [
+        {
+          value: "https://placehold.co/800x900",
+          type: "image",
+          hidden: [],
+        },
+        {
+          value: "https://placehold.co/800x900",
+          type: "image",
+          hidden: [],
+        },
+        {
+          value: "https://placehold.co/800x900",
+          type: "image",
+          hidden: [],
+        },
+      ],
+      type: "gallery",
+      hidden: [],
     },
   };
   return <IndexHome data={data} />;

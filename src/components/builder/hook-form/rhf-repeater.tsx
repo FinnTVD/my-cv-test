@@ -5,13 +5,12 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import RHFTextField from "./rhf-text-field";
 import Iconify from "./iconify";
 import RenderComponent from "@/sections/home/components/RenderComponent";
 import RHFRepeaterClone from "./rhf-repeater-clone";
 import { deepClone, resetKeysInObject } from "@/sections/home/utils";
-import useStore from "@/app/(store)/store";
-
+import { Tab, Tabs } from "@mui/material";
+import { useCallback, useState } from "react";
 export default function RHFRepeater({
   name,
   child,
@@ -19,8 +18,12 @@ export default function RHFRepeater({
   name: string;
   child: any;
 }) {
+  const [currentTab, setCurrentTab] = useState("item0");
+
+  const handleChangeTab = useCallback((event: any, newValue: any) => {
+    setCurrentTab(newValue);
+  }, []);
   const { control, getValues } = useFormContext();
-  const { setCurrentKeyChild } = useStore((state) => state);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -37,66 +40,6 @@ export default function RHFRepeater({
 
   return (
     <Box sx={{ p: 3 }}>
-      {fields.map((item, index) => (
-        <Stack key={index}>
-          {Array.from(Object.keys(child)).map((key, idx) => {
-            if (Array.isArray(getValues(`${name}[${index}].${key}.value`))) {
-              const dataClone = deepClone(
-                getValues(`${name}[${index}].${key}.value`)?.[0]
-              );
-              return (
-                <RHFRepeaterClone
-                  key={idx}
-                  name={`${name}[${index}].${key}.value`}
-                  child={resetKeysInObject(dataClone)}
-                />
-              );
-            } else {
-              return (
-                <RenderComponent
-                  key={idx}
-                  data={getValues(`${name}[${index}].${key}`)}
-                  currentKey={`${name}[${index}].${key}`}
-                />
-              );
-            }
-          })}
-        </Stack>
-      ))}
-
-      <Stack
-        divider={<Divider flexItem sx={{ borderStyle: "dashed" }} />}
-        spacing={1.5}
-      >
-        {fields.map((item, index) => (
-          <Stack key={item.id} alignItems="flex-end" spacing={1.5}>
-            <Stack
-              direction={{ xs: "column", md: "row" }}
-              spacing={2}
-              sx={{ width: 1 }}
-            >
-              <RHFTextField
-                size="small"
-                name={`${name}[${index}]`}
-                label="Item"
-                InputLabelProps={{ shrink: true }}
-              />
-            </Stack>
-
-            <Button
-              size="small"
-              color="error"
-              startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
-              onClick={() => handleRemove(index)}
-            >
-              Remove
-            </Button>
-          </Stack>
-        ))}
-      </Stack>
-
-      <Divider sx={{ my: 3, borderStyle: "dashed" }} />
-
       <Stack
         spacing={3}
         direction={{ xs: "column", md: "row" }}
@@ -112,6 +55,58 @@ export default function RHFRepeater({
           Add Item
         </Button>
       </Stack>
+      <Tabs value={currentTab} onChange={handleChangeTab}>
+        {fields.map((item, index) => (
+          <Tab
+            key={item.id}
+            value={`item${index}`}
+            label={`Item ${index + 1}`}
+          />
+        ))}
+      </Tabs>
+
+      {fields.map(
+        (item, index) =>
+          `item${index}` === currentTab && (
+            <Stack key={index}>
+              {Array.from(Object.keys(child)).map(
+                (key: string, idx: number) => {
+                  if (
+                    Array.isArray(getValues(`${name}[${index}].${key}.value`))
+                  ) {
+                    const dataClone = deepClone(
+                      getValues(`${name}[${index}].${key}.value`)?.[0]
+                    );
+                    return (
+                      <RHFRepeaterClone
+                        key={idx}
+                        name={`${name}[${index}].${key}.value`}
+                        child={resetKeysInObject(dataClone)}
+                      />
+                    );
+                  } else {
+                    return (
+                      <RenderComponent
+                        key={idx}
+                        data={getValues(`${name}[${index}].${key}`)}
+                        currentKey={`${name}[${index}].${key}`}
+                      />
+                    );
+                  }
+                }
+              )}
+              <Divider sx={{ my: 3, borderStyle: "dashed" }} />
+              <Button
+                size="small"
+                color="error"
+                startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
+                onClick={() => handleRemove(index)}
+              >
+                Remove
+              </Button>
+            </Stack>
+          )
+      )}
     </Box>
   );
 }

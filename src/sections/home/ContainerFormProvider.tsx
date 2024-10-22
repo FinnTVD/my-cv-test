@@ -2,15 +2,16 @@
 "use client";
 import FormProvider from "@/components/builder/hook-form";
 
-import { Stack } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { OverviewSchema } from "../schema/OverviewSchema";
-import ContainerEdit from "./ContainerEdit";
+
 import useStore from "@/app/(store)/store";
 import { useEffect } from "react";
-const FormHandle = ({ data }: { data: any }) => {
+import { OverviewSchema } from "./schema/OverviewSchema";
+import ContainerEdit from "./components/ContainerEdit";
+import ContainerContent from "./components/ContainerContent";
+const ContainerFormProvider = ({ data }: { data: any }) => {
   const { setValuesForm, currentKey } = useStore((state) => state);
   const methods = useForm({
     resolver: yupResolver(OverviewSchema),
@@ -19,7 +20,7 @@ const FormHandle = ({ data }: { data: any }) => {
   const {
     watch,
     handleSubmit,
-    formState: { dirtyFields, errors, isSubmitting },
+    formState: { isSubmitting },
   } = methods;
 
   const values = watch();
@@ -36,21 +37,27 @@ const FormHandle = ({ data }: { data: any }) => {
   };
 
   return (
-    <div className="w-[50vw] flex-shrink-0 h-screen sticky top-0 left-0 pt-[2rem]">
+    <main className="w-full flex relative">
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        {currentKey && <ContainerEdit />}
-        <Stack alignItems="flex-end" sx={{ mt: 3 }}>
-          <LoadingButton
-            type="submit"
-            variant="contained"
-            loading={isSubmitting}
-          >
-            Save changes
-          </LoadingButton>
-        </Stack>
+        <div className="w-full flex relative">
+          <div className="w-[50vw] flex-shrink-0 h-screen sticky top-0 left-0 pt-[2rem] overflow-y-auto pb-[6rem]">
+            {currentKey && <ContainerEdit />}
+
+            <div className="fixed bottom-0 left-0 bg-gray-400 p-[1rem] flex justify-end w-[50vw] shadow-2xl">
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                loading={isSubmitting}
+              >
+                Save changes
+              </LoadingButton>
+            </div>
+          </div>
+          <ContainerContent />
+        </div>
       </FormProvider>
-    </div>
+    </main>
   );
 };
 
-export default FormHandle;
+export default ContainerFormProvider;

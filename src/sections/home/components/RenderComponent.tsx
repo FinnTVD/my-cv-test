@@ -7,7 +7,7 @@ import {
 } from "@/components/builder/hook-form";
 
 import { deepClone, resetKeysInObject } from "../utils";
-// import RHFEditor from "@/components/builder/hook-form/rhf-editor";
+import { RHFImage } from "@/components/builder/hook-form/rhf-image";
 
 const RenderComponent = ({
   data,
@@ -16,7 +16,6 @@ const RenderComponent = ({
   data: any;
   currentKey: string;
 }) => {
-  console.log("🚀 ~ data:", data);
   //NOTE - TEXT
   if (data?.type === "text") {
     return (
@@ -41,7 +40,29 @@ const RenderComponent = ({
 
     return <RHFRepeater name={`${currentKey}.value`} child={child} />;
   }
-  return <div></div>;
+  //NOTE - IMAGE
+  if (data?.type === "image") {
+    const name = `${currentKey}.value`;
+
+    return <RHFImage sx={{ my: 3 }} name={name} />;
+  }
+  //NOTE - GALLERY
+  if (data?.type === "gallery") {
+    const name = `${currentKey}.value`;
+
+    return (
+      <RHFImage
+        sx={{ my: 3 }}
+        multiple
+        thumbnail
+        name={name}
+        // onRemove={handleRemoveFile}
+        // onRemoveAll={() => setValue(name, [], { shouldValidate: true })}
+        // onOpen={chooseFiles.onTrue}
+      />
+    );
+  }
+  // return <div></div>;
 };
 
 export default RenderComponent;
