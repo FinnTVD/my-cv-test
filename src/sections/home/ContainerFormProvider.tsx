@@ -9,7 +9,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useStore from "@/app/(store)/store";
 import { useEffect } from "react";
 import { OverviewSchema } from "./schema/OverviewSchema";
-import ContainerEdit from "./components/ContainerEdit";
+// import ContainerEdit from "./components/ContainerEdit";
+import dynamic from "next/dynamic";
+const ContainerEdit = dynamic(() => import("./components/ContainerEdit"), {
+  ssr: false,
+});
 import ContainerContent from "./components/ContainerContent";
 const ContainerFormProvider = ({ data }: { data: any }) => {
   const { setValuesForm, currentKey } = useStore((state) => state);

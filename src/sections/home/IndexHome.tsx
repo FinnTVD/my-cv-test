@@ -1,6 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
-import ContainerFormProvider from "./ContainerFormProvider";
+import dynamic from "next/dynamic";
+const ContainerFormProvider = dynamic(() => import("./ContainerFormProvider"), {
+  ssr: false,
+});
 
 const IndexHome = ({ data }: any) => {
   return <ContainerFormProvider data={data} />;
